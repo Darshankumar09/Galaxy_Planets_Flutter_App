@@ -19,12 +19,15 @@ class _SettingsPageState extends State<SettingsPage> {
       child: CustomScrollView(
         slivers: [
           CupertinoSliverNavigationBar(
-            // leading: IconButton(
-            //   onPressed: () {
-            //     Navigator.pop(context);
-            //   },
-            //   icon: const Icon(Icons.arrow_back_ios),
-            // ),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                size: 2.5.h,
+              ),
+            ),
             largeTitle: Text(
               'Settings',
               style: TextStyle(
@@ -34,7 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-          SliverFillRemaining(
+          SliverToBoxAdapter(
             child: Container(
               padding: EdgeInsets.all(2.h),
               child: Column(

@@ -8,6 +8,8 @@ class JsonDecodeProvider extends ChangeNotifier {
 
   List<JsonDecodeModel> galaxyDetails = [];
 
+  FavoriteModel favoriteModel = FavoriteModel(favoriteList: []);
+
   Future<void> loadJson() async {
     data = await rootBundle.loadString('lib/json/planet_details.json');
 
@@ -18,5 +20,23 @@ class JsonDecodeProvider extends ChangeNotifier {
           (e) => JsonDecodeModel.map(data: e),
         )
         .toList();
+  }
+
+  favoritePlanet(int index) {
+    if (galaxyDetails[index].favorite) {
+      galaxyDetails[index].favorite = false;
+      favoriteModel.favoriteList.remove(galaxyDetails[index]);
+    } else {
+      galaxyDetails[index].favorite = true;
+      favoriteModel.favoriteList.add(galaxyDetails[index]);
+    }
+    notifyListeners();
+  }
+
+  removeFavoritePlanet(int index) {
+    galaxyDetails[int.parse(favoriteModel.favoriteList[index].position)]
+        .favorite = false;
+    favoriteModel.favoriteList.remove(favoriteModel.favoriteList[index]);
+    notifyListeners();
   }
 }

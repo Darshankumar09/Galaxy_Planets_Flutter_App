@@ -9,6 +9,7 @@ class JsonDecodeModel {
   String distance;
   String description;
   String image;
+  bool favorite;
 
   JsonDecodeModel({
     required this.position,
@@ -21,6 +22,7 @@ class JsonDecodeModel {
     required this.distance,
     required this.description,
     required this.image,
+    required this.favorite,
   });
 
   factory JsonDecodeModel.map({required Map data}) {
@@ -35,6 +37,13 @@ class JsonDecodeModel {
       distance: data['distance'],
       description: data['description'],
       image: data['image'],
+      favorite: false,
     );
   }
+}
+
+class FavoriteModel {
+  List<JsonDecodeModel> favoriteList;
+
+  FavoriteModel({required this.favoriteList});
 }

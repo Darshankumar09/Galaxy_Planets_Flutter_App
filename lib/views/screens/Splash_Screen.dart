@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:galaxy_planets/controllers/providers/json_decode_provider.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,6 +12,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  loadData() async {
+    await Provider.of<JsonDecodeProvider>(context, listen: false).loadJson();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     Timer(
@@ -20,18 +31,17 @@ class _SplashScreenState extends State<SplashScreen> {
       },
     );
 
-    return CupertinoPageScaffold(
-      backgroundColor: CupertinoColors.black,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/sun.png',
-              height: 30.h,
-              width: 30.h,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/splash_screen.png',
+              ),
+              fit: BoxFit.cover,
             ),
-          ],
+          ),
         ),
       ),
     );
